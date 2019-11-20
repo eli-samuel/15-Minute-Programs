@@ -8,17 +8,24 @@ public class DiceRoller {
 
         Scanner input = new Scanner(System.in);
         Random rand = new Random();
-        int sides, sum=0;
+        int sides, numDie, sum=0;
         int[] dice;
         boolean rollAgain = false;
 
-        System.out.print("How many die? ");
-        dice = new int[input.nextInt()];
+        do {
+            System.out.print("How many die? ");
+            numDie = input.nextInt();
+        } while (numDie < 1);
 
-        System.out.print("How many sides on each? ");
-        sides = input.nextInt();
+        dice = new int[numDie];
 
         do {
+            System.out.print("How many sides on each? ");
+            sides = input.nextInt();
+        } while (sides < 1);
+
+        do {
+            sum = 0;
             for (int i=0; i<dice.length; i++) {
                 sum += dice[i] = rand.nextInt(sides)+1;
             }
@@ -26,9 +33,11 @@ public class DiceRoller {
             System.out.println("\nYou rolled: " + Arrays.toString(dice) + " for a total of " + sum + ".");
 
             System.out.print("\nRoll again? (Y/N) ");
-            if (input.next().toLowerCase().equals("y")) rollAgain = true;
+            if (input.next().toLowerCase().charAt(0) == 'y') rollAgain = true;
             else rollAgain = false;
 
         } while (rollAgain);
+
+        System.out.println("Thanks for using my dice roller program!");
     }
 }
